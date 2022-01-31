@@ -52,7 +52,7 @@ const bank = [{
 
 
 
-const DrumMachine = () => {
+const App = () => {
   //we are setting our state so that we can trigger sound when we press our drumPad buttons
   const [padTriggered, setPadTriggered] = useState('Start Jammin!')
   
@@ -91,22 +91,66 @@ const DrumMachine = () => {
   },[])
   
   return(
-    <div id="wrapper">
-      <div id="title">Drum Machine</div>
-       <div id="drum-machine">
+    <Wrapper id="wrapper">
+      <Title id="title">Drum Machine</Title>
+       <DrumMachine id="drum-machine">
            {bank.map(pad => (
-            <button id={pad.id} className="drum-pad" onClick={playSound}>
+            <Button id={pad.id} className="drum-pad" onClick={playSound}>
               {pad.keyTrigger}
               <audio id={pad.keyTrigger} className="clip" src={pad.url}/>
-            </button>
+            </Button>
            ))}
-         <div id="display">
+         <Display id="display">
            {padTriggered}
-          </div>
-       </div>
-      </div>
+          </Display>
+       </DrumMachine>
+      </Wrapper>
   )
 }
 
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+const Title = styled.h1`
+  padding: 80px;
+  font-size: 80px;
+  font-family: 'Lobster', cursive;
+  color: papayawhip;
+/*   color: #f6bd60; */
+`
+const DrumMachine = styled.div`
+  width: 310px;
+  height: 310px;
+  background-color: #f5cac3;
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+`
+const Display = styled.div`
+  padding: 10px;
+  font-weight: 500;
+  font-size: 25px;
+  color: #f28482;
+  font-family: 'Lobster', cursive;
+`
+const Button = styled.button`
+  height: 70px;
+  width: 70px;
+  margin:10px;
+  background-color: #f7ede2;
+  border: 0px;
+  border-radius: 10px;
+  color: #f28482;
+  font-size: 20px;
+  transition: 400ms;
+  &:hover {
+    background-color: #f28482;
+    color: #f7ede2;
+  }
+`
 
-export default DrumMachine
+export default App
